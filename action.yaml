@@ -18,4 +18,4 @@ runs:
 
     - name: Validate PR checklist
       shell: bash
-      run: main.sh ${{ inputs.github_token }} "${{ github.event.pull_request.url }}"
+      run: ${{ github.action_path }}/main.sh ${{ inputs.github_token }} "${{ github.event.pull_request.url }}"
