@@ -1,0 +1,32 @@
+name: "ChecklistValidator for PR"
+description: "Checks if all items in the PR checklist are checked."
+author: "Your Name"
+inputs:
+  github_token:
+    description: "GitHub Token"
+    required: true
+outputs:
+  result:
+    description: "The result of the checklist check"
+    value: ${{ steps.checklist.outputs.result }}
+runs:
+  using: "composite"
+  steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Install jq
+      shell: bash
+      run: sudo apt-get install jq
+
+    - name: Set up shell script permissions
+      working-directory: ./
+      shell: bash
+      run: chmod +x main.sh
+
+    - name: Validate PR checklist
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ secrets.NKR_PERSONAL_TOKEN }}
+      working-directory: ./
+      run: ./main.sh $GITHUB_TOKEN "${{ github.event.pull_request.url }}"
