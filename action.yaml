@@ -26,7 +26,5 @@ runs:
 
     - name: Validate PR checklist
       shell: bash
-      env:
-        GITHUB_TOKEN: ${{ secrets.NKR_PERSONAL_TOKEN }}
       working-directory: ./
-      run: ./main.sh $GITHUB_TOKEN "${{ github.event.pull_request.url }}"
+      run: ./main.sh ${{ inputs.github_token }} "${{ github.event.pull_request.url }}"
