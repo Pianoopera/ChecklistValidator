@@ -17,8 +17,6 @@ fi
 # プルリクエストの内容を取得
 PR_BODY=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "$PR_URL" | jq -r '.body')
 
-echo $PR_BODY
-
 # チェックリストの未チェック項目をカウント
 UNCHECKED_COUNT=$(echo "$PR_BODY" | grep -o "\- \[ \]" | wc -l)
 
