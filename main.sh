@@ -1,8 +1,18 @@
 #!/bin/bash
 
-# GitHub APIトークンとプルリクエストURLを環境変数から取得
-GITHUB_TOKEN=$1
-PR_URL=$2
+# Ensure GITHUB_TOKEN is set
+if [ -z "$GITHUB_TOKEN" ]; then
+  echo "GITHUB_TOKEN is not set. Exiting."
+  exit 1
+fi
+
+PR_URL=$1
+
+# Ensure PR_URL is set
+if [ -z "$PR_URL" ]; then
+  echo "Pull request URL is not provided. Exiting."
+  exit 1
+fi
 
 # プルリクエストの内容を取得
 PR_BODY=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "$PR_URL" | jq -r '.body')
