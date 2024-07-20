@@ -14,6 +14,12 @@ if [ -z "$PR_URL" ]; then
   exit 1
 fi
 
+# PR_URLの形式を検証
+if ! [[ $PR_URL =~ ^https://github\.com/[a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+/pull/[0-9]+$ ]]; then
+  echo "Pull request URL is invalid. Exiting."
+  exit 1
+fi
+
 # プルリクエストの内容を取得
 PR_BODY=$(curl -s -H "Authorization: token $GITHUB_TOKEN" "$PR_URL" | jq -r '.body')
 

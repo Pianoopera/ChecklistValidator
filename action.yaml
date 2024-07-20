@@ -12,6 +12,10 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Install jq
+      shell: bash
+      run: sudo apt-get install jq
+
     - name: Validate PR checklist
       shell: bash
       env:
