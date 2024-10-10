@@ -1,6 +1,6 @@
 name: "ChecklistValidator for PR"
 description: "Checks if all items in the PR checklist are checked."
-author: "Your Name"
+author: "Pianoopepa"
 inputs:
   github_token:
     description: "GitHub Token"
